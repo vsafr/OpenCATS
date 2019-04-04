@@ -8,7 +8,7 @@ More details:
 
 <http://www.opencats.org>
 
-End user/Installation  documentation:
+End user/Installation :
 
 <http://opencats-documentation.readthedocs.io/en/latest/>
 
