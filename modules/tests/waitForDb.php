@@ -7,7 +7,7 @@ $count = 30;
 while (!$canConnectAndSelectDb && $count > 0)
 {
     $connection = @mysqli_connect(
-        DATABASE_HOST, DATABASE_USER, DATABASE_PASS
+        DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME
     );
     if ($connection)
     {

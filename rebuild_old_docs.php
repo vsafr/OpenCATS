@@ -50,8 +50,8 @@ function rebuild_old_docs() {
 }
 
 
-//$con = mysqli_connect("localhost","root","root");
-$con = mysqli_connect(DATABASE_HOST, DATABASE_USER, DATABASE_PASS);
+//$con = mysql_connect("localhost","root","root");
+$con = mysqli_connect(DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME);
 if (!$con)
 {
   die('Could not connect: ' . mysqli_error($con));

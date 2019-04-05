@@ -1067,7 +1067,7 @@ function MySQLConnect()
     global $tables, $mySQLConnection;
 
     $mySQLConnection = @mysqli_connect(
-        DATABASE_HOST, DATABASE_USER, DATABASE_PASS
+        DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME
     );
 
     if (!$mySQLConnection)

@@ -235,8 +235,8 @@ class InstallationTests
         echo '<tr class="fail"><td><strong>PHP MySQL extension (mysqli) is not loaded.</strong><br />'
             . 'Check your settings in php.ini.<br /><br />'
             . 'Under certain Linux / BSD distributions, the PHP MySQL extension is a separate package.<br /><br />'
-            . '<strong>Debian:</strong> Run "apt-get install php5-mysqli" and restart your webserver.<br /><br />'
-            . '<strong>FreeBSD:</strong> Install the php5-mysqli port, or configure MySQL support in the '
+            . '<strong>Debian:</strong> Run "apt-get install php7.*-mysqli" and restart your webserver.<br /><br />'
+            . '<strong>FreeBSD:</strong> Install the php7.*-mysqli port, or configure MySQL support in the '
             . 'php-extensions port and restart your webserver.</td></tr>';
         return false;
     }
@@ -387,7 +387,7 @@ class InstallationTests
     public static function checkMySQL($host, $user, $pass, $name)
     {
         /* Check MySQL connection. */
-		$db = @mysqli_connect($host, $user, $pass);
+		$db = @mysqli_connect($host, $user, $pass, $name);
         if (self::DEBUG_FAIL || !$db)
         {
             echo sprintf(

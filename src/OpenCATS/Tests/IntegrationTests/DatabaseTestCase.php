@@ -2,36 +2,52 @@
 namespace OpenCATS\Tests\IntegrationTests;
 
 use PHPUnit\Framework\TestCase;
-
 class DatabaseTestCase extends TestCase
+
+
+//    $preserveGlobalState = FALSE;
+//   $runTestInSeparateProcess = TRUE;
+
+    //setup and teardown functions
+//    protected function setUp() { }
+//    protected function tearDown() { }
+
+
 {
     private $connection;
 
-    function setUp()
+    function setUp() 
     {
         global $mySQLConnection;
         parent::setUp();
         include_once('./constants.php');
-        define('DATABASE_NAME', 'cats_integrationtest');
-        define('DATABASE_HOST', 'integrationtestdb');
-
-        include_once('./config.php');
-        include_once(LEGACY_ROOT . '/lib/DatabaseConnection.php');
+	include_once('./config.php');
+	include_once('./lib/DatabaseConnection.php');
+	 if(!defined('DATABASE_NAME')){
+		define('DATABASE_NAME', 'cats_integrationtest');
+	 }
+         if(!defined('DATABASE_HOST')){
+		define('DATABASE_HOST', 'integrationtestdb');
+	 }
+//        include_once('./config.php');
+//        include_once('./lib/DatabaseConnection.php');
         $mySQLConnection = @mysqli_connect(
-            DATABASE_HOST, DATABASE_USER, DATABASE_PASS
+            DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME
             );
         if (!$mySQLConnection)
         {
             throw new \Exception('Error connecting to the mysql server');
         }
+	print "connected successfully\n";
         $this->mySQLQuery('DROP DATABASE IF EXISTS ' . DATABASE_NAME);
         $this->mySQLQuery('CREATE DATABASE ' . DATABASE_NAME);
 
         @mysqli_select_db(DATABASE_NAME, $mySQLConnection);
-
+	print "database selected\n";
         $this->mySQLQueryMultiple(file_get_contents('db/cats_schema.sql'), ";\n");
     }
-
+//	print "mysql queried\n";
+//    }
     // TODO: remove duplicated code
     private function MySQLQueryMultiple($SQLData, $delimiter = ';')
     {
@@ -50,7 +66,7 @@ class DatabaseTestCase extends TestCase
         }
     }
 
-    private function mySQLQuery($query, $ignoreErrors = false)
+    private function mySQLQuery($query, $ignoreErrors = true)
     {
         global $mySQLConnection;
 
@@ -76,7 +92,7 @@ class DatabaseTestCase extends TestCase
     }
 
 
-    function tearDown()
+    protected function tearDown()
     {
         $this->mySQLQuery('DROP DATABASE IF EXISTS ' . DATABASE_NAME);
     }
