@@ -5,14 +5,6 @@ use PHPUnit\Framework\TestCase;
 class DatabaseTestCase extends TestCase
 
 
-//    $preserveGlobalState = FALSE;
-//   $runTestInSeparateProcess = TRUE;
-
-    //setup and teardown functions
-//    protected function setUp() { }
-//    protected function tearDown() { }
-
-
 {
     private $connection;
 
@@ -32,7 +24,7 @@ class DatabaseTestCase extends TestCase
 //        include_once('./config.php');
 //        include_once('./lib/DatabaseConnection.php');
         $mySQLConnection = @mysqli_connect(
-            DATABASE_HOST, DATABASE_USER, DATABASE_PASS, DATABASE_NAME
+            DATABASE_HOST, DATABASE_USER, DATABASE_PASS
             );
         if (!$mySQLConnection)
         {
