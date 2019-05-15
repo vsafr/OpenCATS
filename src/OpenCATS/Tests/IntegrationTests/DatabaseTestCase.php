@@ -18,9 +18,7 @@ class DatabaseTestCase extends TestCase
 
 	define('DATABASE_NAME', 'cats_integrationtest');
         define('DATABASE_HOST', 'integrationtestdb');
-	    
-//        include_once('./config.php');
-//        include_once('./lib/DatabaseConnection.php');
+	
         $mySQLConnection = @mysqli_connect(
             DATABASE_HOST, DATABASE_USER, DATABASE_PASS
             );
@@ -29,8 +27,11 @@ class DatabaseTestCase extends TestCase
             throw new \Exception('Error connecting to the mysql server');
         }
 	print "connected successfully\n";
-        $this->mySQLQuery('DROP DATABASE IF EXISTS ' . DATABASE_NAME, false);
-        $this->mySQLQuery('CREATE DATABASE ' . DATABASE_NAME, false);
+	    
+	$res = mysqli_query($mySQLConnection, 'DROP DATABASE IF EXISTS ' . DATABASE_NAME);
+	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
+	$res = mysqli_query($mySQLConnection, 'CREATE DATABASE ' . DATABASE_NAME);    
+	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
 
         @mysqli_select_db(DATABASE_NAME, $mySQLConnection);
 	print "database selected\n";
