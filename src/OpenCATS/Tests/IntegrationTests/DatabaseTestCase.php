@@ -33,7 +33,7 @@ class DatabaseTestCase extends TestCase
 	$res = mysqli_query($mySQLConnection, 'CREATE DATABASE ' . DATABASE_NAME);    
 	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
 
-        $res = mysqli_select_db(DATABASE_NAME, $mySQLConnection);
+        $res = mysqli_select_db($mySQLConnection, DATABASE_NAME);
 	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
 	print "Database selected\n";
         $this->mySQLQueryMultiple(file_get_contents('db/cats_schema.sql'), ";\n");
