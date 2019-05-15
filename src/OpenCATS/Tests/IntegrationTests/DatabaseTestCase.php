@@ -52,7 +52,7 @@ class DatabaseTestCase extends TestCase
                 continue;
             }
 
-            $this->mySQLQuery($SQL);
+            $this->mySQLQuery($SQL, false);
         }
     }
 
