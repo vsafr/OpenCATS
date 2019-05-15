@@ -29,8 +29,8 @@ class DatabaseTestCase extends TestCase
             throw new \Exception('Error connecting to the mysql server');
         }
 	print "connected successfully\n";
-        $this->mySQLQuery('DROP DATABASE IF EXISTS ' . DATABASE_NAME);
-        $this->mySQLQuery('CREATE DATABASE ' . DATABASE_NAME);
+        $this->mySQLQuery('DROP DATABASE IF EXISTS ' . DATABASE_NAME, false);
+        $this->mySQLQuery('CREATE DATABASE ' . DATABASE_NAME, false);
 
         @mysqli_select_db(DATABASE_NAME, $mySQLConnection);
 	print "database selected\n";
