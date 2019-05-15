@@ -15,12 +15,10 @@ class DatabaseTestCase extends TestCase
         include_once('./constants.php');
 	include_once('./config.php');
 	include_once('./lib/DatabaseConnection.php');
-	 if(!defined('DATABASE_NAME')){
-		define('DATABASE_NAME', 'cats_integrationtest');
-	 }
-         if(!defined('DATABASE_HOST')){
-		define('DATABASE_HOST', 'integrationtestdb');
-	 }
+
+	define('DATABASE_NAME', 'cats_integrationtest');
+        define('DATABASE_HOST', 'integrationtestdb');
+	    
 //        include_once('./config.php');
 //        include_once('./lib/DatabaseConnection.php');
         $mySQLConnection = @mysqli_connect(
