@@ -26,15 +26,16 @@ class DatabaseTestCase extends TestCase
         {
             throw new \Exception('Error connecting to the mysql server');
         }
-	print "connected successfully\n";
+	print "Connected successfully\n";
 	    
 	$res = mysqli_query($mySQLConnection, 'DROP DATABASE IF EXISTS ' . DATABASE_NAME);
 	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
 	$res = mysqli_query($mySQLConnection, 'CREATE DATABASE ' . DATABASE_NAME);    
 	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
 
-        @mysqli_select_db(DATABASE_NAME, $mySQLConnection);
-	print "database selected\n";
+        $res = mysqli_select_db(DATABASE_NAME, $mySQLConnection);
+	if (!$res) { die ("Query failed: (" . $mySQLConnection->errno . ") " . $mySQLConnection->error); }
+	print "Database selected\n";
         $this->mySQLQueryMultiple(file_get_contents('db/cats_schema.sql'), ";\n");
     }
 //	print "mysql queried\n";
